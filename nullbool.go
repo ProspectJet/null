@@ -37,10 +37,7 @@ func (nb *Bool) Encode(ptr unsafe.Pointer, stream *jsoniter.Stream) {
 // IsEmpty detect whether primitive.ObjectID is empty.
 func (nb *Bool) IsEmpty(ptr unsafe.Pointer) bool {
 	val := (*Bool)(ptr)
-	if !val.Valid {
-		return true
-	}
-	return false
+	return !val.Valid
 }
 
 func (nb *Bool) UnmarshalCSV(b string) error {
@@ -62,7 +59,7 @@ func (nb *Bool) UnmarshalJSON(b []byte) error {
 	if err := json.Unmarshal(b, &i); err != nil {
 		return err
 	}
-	if bytes.Compare(b, []byte("null")) == 0 {
+	if bytes.Equal(b, []byte("null")) {
 		nb.Valid = false
 		return nil
 	}

@@ -59,7 +59,7 @@ func (nf *Float64) UnmarshalJSON(b []byte) error {
 	if err := json.Unmarshal(b, &i); err != nil {
 		return err
 	}
-	if bytes.Compare(b, []byte("null")) == 0 {
+	if bytes.Equal(b, []byte("null")) {
 		nf.Valid = false
 		return nil
 	}

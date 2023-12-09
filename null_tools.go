@@ -19,11 +19,6 @@ import (
 // valid until the next call to Next, Scan, or Close.
 type RawBytes []byte
 
-type decimal interface {
-	decimalDecompose
-	decimalCompose
-}
-
 type decimalDecompose interface {
 	// Decompose returns the internal decimal state in parts.
 	// If the provided buf has sufficient capacity, buf may be returned as the coefficient with
